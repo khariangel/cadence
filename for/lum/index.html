@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Card I · LÜM</title>
+<meta name="description" content="A Cadence card made for LÜM.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root {
+  --page: #e9e4da;
+  --ink: #1d1c19;
+  --muted: #6c675e;
+  --paper: #f4efe4;
+  --afterglow: #a65a24;
+  --tempo: #46633f;
+  --rest: #5f6a78;
+  --dusk: #c98a7a;   /* Ojai pink-moment placeholder; replace once the Flora texture is in */
+  --rule: rgba(29, 28, 25, .35);
+}
+* { box-sizing: border-box; margin: 0; }
+body {
+  background: var(--page);
+  color: var(--ink);
+  font-family: "Hanken Grotesk", system-ui, sans-serif;
+  min-height: 100vh;
+  display: flex; flex-direction: column; align-items: center;
+  padding: 48px 16px 64px;
+}
+.label { font-size: 10.5px; letter-spacing: .22em; text-transform: uppercase; font-weight: 500; }
+.serif { font-family: "Instrument Serif", Georgia, serif; }
+.it { font-style: italic; }
+header.sheet { text-align: center; margin-bottom: 36px; color: var(--muted); }
+header.sheet h1 { font-family: "Instrument Serif", serif; font-weight: 400; font-size: 30px; color: var(--ink); margin-top: 8px; }
+
+.deck { display: flex; gap: 40px; flex-wrap: wrap; justify-content: center; }
+.side { display: flex; flex-direction: column; align-items: center; gap: 14px; }
+.side > .label { color: var(--muted); }
+
+/* card: tarot proportion, hanafuda sparseness */
+.card {
+  width: min(340px, 86vw);
+  aspect-ratio: 7 / 12;
+  border-radius: 14px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 1px 0 rgba(0,0,0,.04), 0 18px 40px -18px rgba(40, 30, 20, .45);
+  isolation: isolate;
+}
+/* texture layer: placeholder for the Flora texture */
+.card .texture {
+  position: absolute; inset: 0; z-index: -2;
+  background: url("oak-shadow.jpg") center / cover;
+}
+.card.back .texture {
+  background:
+    linear-gradient(180deg, transparent 0, transparent 110px, var(--paper) 185px),
+    url("pink-moment.jpg") center top / 100% auto no-repeat;
+}
+.back .frame .top { color: #fffaf2; }
+/* grain */
+.card::after {
+  content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  opacity: .32; mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.3  0 0 0 0 0.25  0 0 0 0 0.2  0 0 0 .55 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+/* tarot frame: hairline inset */
+.frame {
+  position: absolute; inset: 12px; border: 1px solid var(--rule); border-radius: 8px;
+  display: flex; flex-direction: column; padding: 18px 18px 16px;
+}
+.front .frame { border-color: rgba(255, 248, 238, .6); color: #fffaf2; text-shadow: 0 1px 10px rgba(60, 40, 30, .3); }
+
+.top { display: flex; justify-content: space-between; align-items: baseline; }
+.numeral { font-family: "Instrument Serif", serif; font-size: 22px; line-height: 1; }
+
+/* hanafuda month mark, vertical */
+.month {
+  position: absolute; right: 16px; top: 64px;
+  writing-mode: vertical-rl; letter-spacing: .3em; font-size: 10px; text-transform: uppercase; opacity: .8;
+}
+
+.emblem {
+  flex: 1; display: flex; align-items: center; justify-content: center;
+}
+.emblem .seal { width: 86%; mix-blend-mode: multiply; filter: contrast(1.05); }
+.emblem .slot {
+  width: 68%; aspect-ratio: 1; border: 1px dashed rgba(255, 248, 238, .6); border-radius: 50%;
+  display: flex; align-items: center; justify-content: center; text-align: center;
+  font-size: 10px; letter-spacing: .18em; text-transform: uppercase; padding: 18px; opacity: .9;
+}
+
+.title { text-align: center; border-top: 1px solid rgba(255, 248, 238, .5); padding-top: 12px; }
+.title h2 { font-family: "Instrument Serif", serif; font-weight: 400; font-size: 30px; line-height: 1.05; }
+.title p { font-family: "Instrument Serif", serif; font-style: italic; font-size: 15.5px; line-height: 1.3; margin-top: 6px; opacity: .92; }
+.title .label { margin-top: 12px; opacity: .8; font-size: 9.5px; }
+
+/* back */
+.back .frame { gap: 11px; }
+.back h3 { font-family: "Instrument Serif", serif; font-weight: 400; font-size: 23px; line-height: 1.05; }
+.back h3 .it { color: var(--afterglow); }
+.paths { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+.path { padding: 12px 10px 12px 0; }
+.path + .path { border-left: 1px solid var(--rule); padding-left: 12px; }
+.path .label { color: var(--tempo); font-size: 9.5px; }
+.path .big { font-family: "Instrument Serif", serif; font-size: 30px; line-height: 1; margin: 6px 0 2px; }
+.path .small { font-size: 11.5px; color: var(--muted); line-height: 1.35; }
+.path .order { margin-top: 8px; font-size: 11.5px; }
+.path .order b { font-weight: 600; color: var(--afterglow); white-space: nowrap; }
+.lede { font-family: "Instrument Serif", serif; font-style: italic; font-size: 14px; line-height: 1.3; color: var(--muted); margin-top: -4px; }
+.close { font-family: "Instrument Serif", serif; font-style: italic; font-size: 14px; line-height: 1.3; }
+.facts { font-size: 11px; color: var(--muted); line-height: 1.45; }
+.question { margin-top: auto; }
+.question .label { color: var(--rest); font-size: 9.5px; }
+.question p { font-family: "Instrument Serif", serif; font-style: italic; font-size: 17px; line-height: 1.2; margin-top: 6px; }
+.sign { display: flex; justify-content: space-between; align-items: baseline; border-top: 1px solid var(--rule); padding-top: 10px; }
+.sign .serif { font-size: 16px; }
+.sign .label { font-size: 9px; color: var(--muted); }
+
+.ph { background: rgba(166, 90, 36, .12); outline: 1px dashed rgba(166, 90, 36, .5); border-radius: 3px; padding: 0 3px; }
+.front .ph { background: rgba(255, 250, 242, .16); outline-color: rgba(255, 250, 242, .6); }
+
+footer.notes { max-width: 720px; margin-top: 44px; font-size: 13px; line-height: 1.55; color: var(--muted); }
+footer.notes h4 { color: var(--ink); font-size: 11px; letter-spacing: .2em; text-transform: uppercase; margin: 18px 0 6px; font-weight: 600; }
+footer.notes ul { padding-left: 18px; }
+
+header.sheet h1 { font-size: 34px; }
+header.sheet p { font-family: "Instrument Serif", serif; font-style: italic; font-size: 17px; color: var(--ink); margin-top: 10px; }
+.note { max-width: 520px; margin-top: 44px; text-align: center; color: var(--muted); font-size: 14px; line-height: 1.6; }
+.note a { color: var(--ink); text-underline-offset: 3px; }
+.note .sig { font-family: "Instrument Serif", serif; font-size: 20px; color: var(--ink); margin-top: 14px; }
+</style>
+</head>
+<body>
+
+<header class="sheet">
+  <span class="label">Cadence · Card I</span>
+  <h1>For LÜM</h1>
+  <p>Made for Kianna, from Ojai's warm terracotta wilderness.</p>
+</header>
+
+<div class="deck">
+
+  <!-- FRONT: for her customers -->
+  <div class="side">
+    <span class="label">Front · for your customers</span>
+    <article class="card front" aria-label="Card front">
+      <div class="texture"></div>
+      <div class="frame">
+        <div class="top">
+          <span class="numeral">I</span>
+          <span class="label">LÜM · Ojai</span>
+        </div>
+        <span class="month">October</span>
+        <div class="emblem">
+          <img class="seal" src="seal.jpg" alt="Circle seal: a flame-sun over terracotta valleys, ringed in oak">
+        </div>
+        <div class="title">
+          <h2>The Terracotta Wilderness</h2>
+          <p>Ojai tenderness.</p>
+          <div class="label">48 hours of light</div>
+        </div>
+      </div>
+    </article>
+  </div>
+
+  <!-- BACK: for Kianna -->
+  <div class="side">
+    <span class="label">Back · for you</span>
+    <article class="card back" aria-label="Card back">
+      <div class="texture"></div>
+      <div class="frame">
+        <div class="top">
+          <span class="label">A reading</span>
+          <span class="numeral">I</span>
+        </div>
+        <h3 style="margin-top:56px">When does a LÜM candle <span class="it">run out?</span></h3>
+        <p class="lede">It depends on how it's burned. That decides when a customer is ready for the next one.</p>
+        <div class="paths">
+          <div class="path">
+            <span class="label">Burned nightly</span>
+            <div class="big">3 wks</div>
+            <div class="order">The moment to remind them: <b>around day 22</b></div>
+          </div>
+          <div class="path">
+            <span class="label">Some evenings</span>
+            <div class="big">8 wks</div>
+            <div class="order">The moment to remind them: <b>around day 54</b></div>
+          </div>
+        </div>
+        <p class="close">A reminder timed to the candle, not the calendar, is what brings them back.</p>
+        <div class="question">
+          <span class="label">One question</span>
+          <p>What are your aspirations for LÜM right now?</p>
+        </div>
+        <div class="sign">
+          <span class="serif">Khari Angel</span>
+          <span class="label">Cadence · 01</span>
+        </div>
+      </div>
+    </article>
+  </div>
+
+</div>
+
+
+<section class="note">
+  <p>The front is yours to use, in a box, on a shelf, wherever it helps. <a href="lum-card-front.png" download>Download the front</a>.</p>
+  <p class="sig">Khari Angel</p>
+</section>
+
+</body>
+</html>
